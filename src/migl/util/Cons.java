@@ -1,4 +1,4 @@
-package migl2.util;
+package migl.util;
 
 /**
  * Building block for implementing lists.

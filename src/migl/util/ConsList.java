@@ -1,4 +1,4 @@
-package migl2.util;
+package migl.util;
 
 import java.util.function.Function;
 
