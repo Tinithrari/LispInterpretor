@@ -1,4 +1,4 @@
-package migl2.util;
+package migl.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -8,6 +8,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import migl.util.ConsList;
 
 public class ConsListTest {
 
