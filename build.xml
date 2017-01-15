@@ -76,7 +76,7 @@
       <jacoco:coverage  destfile="${sonar.jacoco.reportPath}">
       <junit fork="yes" forkmode="once" printsummary="yes" haltonfailure="no" failureproperty="tests.failure">
       <classpath refid="mypath"/>
-      <formatter type="plain"/> 
+      <formatter type="plain" usefile="false"/> 
       <formatter type="xml"/>
       <batchtest fork="yes" todir="${testreports}">
         <fileset dir="${build}">
