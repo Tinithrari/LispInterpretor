@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import migl.util.ConsList;
-
 public class ConsListTest {
 
     private static Class<? extends ConsList<Integer>> listimpl;
@@ -20,7 +18,7 @@ public class ConsListTest {
     @SuppressWarnings("unchecked")
     @BeforeClass
     public static void findImpl() throws ClassNotFoundException {
-        listimpl = (Class<? extends ConsList<Integer>>) Class.forName("migl2.util.ConsListImpl");
+        listimpl = (Class<? extends ConsList<Integer>>) Class.forName("migl.util.ConsListImpl");
     }
 
     @Before
