@@ -12,6 +12,7 @@
        <property name="sonar.projectKey" value="${etudiant}:2017:MyLisp" />
        <property name="sonar.projectName" value="${etudiant} Lisp 17" />
        <property name="sonar.projectVersion" value="1.0" />
+       <property name="sonar.java.source" value="${project.java.version}" />
        <property name="sonar.java.binaries" value="build" />
        <property name="sonar.java.libraries" value="lib/*.jar" />
        <property name="sonar.sources" value="src" />
