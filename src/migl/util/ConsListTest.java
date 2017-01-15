@@ -71,13 +71,13 @@ public class ConsListTest {
     }
 
     @Test
-    public void testPrependDoesShareSublist() {
+    public void testAppendDoesNoShareSublist() {
         ConsList<Integer> list2 = list.append(1);
         assertEquals(list, list2.cdr());
         assertNotSame(list, list2.cdr());
         ConsList<Integer> list3 = list2.append(2);
         assertEquals(list2.car(), list3.car());
-        assertSame(list2, list3.cdr());
+        assertNotSame(list2, list3.cdr());
     }
 
     @Test
