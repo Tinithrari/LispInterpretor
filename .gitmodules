@@ -1,0 +1,4 @@
+[submodule "TDD2017TESTS"]
+	path = TDD2017TESTS
+	url = https://forge.univ-artois.fr/m1-2016-2017/TDD2017TESTS.git
+	branch = master
