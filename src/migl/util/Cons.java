@@ -51,7 +51,7 @@ public class Cons<L, R> {
      * 
      * @return the left hand side of the pair if any.
      */
-    public L getCar() {
+    public L car() {
         return car;
     }
 
@@ -60,7 +60,7 @@ public class Cons<L, R> {
      * 
      * @return the right hand side of the pair if any.
      */
-    public R getCdr() {
+    public R cdr() {
         return cdr;
     }
 
