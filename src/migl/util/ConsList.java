@@ -31,24 +31,28 @@ public interface ConsList<E> extends Iterable<E> {
     /**
      * Check if the list is empty or not.
      * 
-     * @return
+     * @return true if the list is empty, else false.
      */
     boolean isEmpty();
 
     /**
      * Retrieve the first element of the list.
      * 
+     * @return the first element of the list.
      */
     E car();
 
     /**
      * Return the sublist corresponding to all but the first element.
      * 
+     * @return all but the first element of the list.
      */
     ConsList<E> cdr();
 
     /**
      * Returns the size of the list (the number of elements it contains).
+     * 
+     * @return the number of elements in the list.
      */
     int size();
 
