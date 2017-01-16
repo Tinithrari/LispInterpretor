@@ -9,8 +9,9 @@ package migl.util;
  * @author leberre
  *
  * @param <L>
- *            the
+ *            the type of the left hand side of the pair
  * @param <R>
+ *            the type of the right hand side of the pair
  */
 public class Cons<L, R> {
 
