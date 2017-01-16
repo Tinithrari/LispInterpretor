@@ -17,6 +17,7 @@ public interface ConsList<E> extends Iterable<E> {
      * 
      * @param e
      *            an element.
+     * @return a new list containing e in front of the current one.
      */
     ConsList<E> prepend(E e);
 
@@ -25,6 +26,7 @@ public interface ConsList<E> extends Iterable<E> {
      * 
      * @param e
      *            an element
+     * @return a new list containing e at the end of the current one.
      */
     ConsList<E> append(E e);
 
