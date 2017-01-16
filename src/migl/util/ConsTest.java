@@ -37,6 +37,8 @@ public class ConsTest {
         assertEquals(c1, c2);
         assertNotEquals(c1, null);
         assertNotEquals(c1, true);
+        assertNotEquals(null, c2);
+        assertNotEquals(true, c2);
         assertNotEquals(c1, c3);
         assertNotEquals(c1, c4);
         assertNotEquals(c1, c5);
