@@ -6,24 +6,15 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ConsListTest {
 
-    private static Class<? extends ConsList<Integer>> listimpl;
-
-    private static ConsList<Integer> list;
-
-    @SuppressWarnings("unchecked")
-    @BeforeClass
-    public static void findImpl() throws ClassNotFoundException {
-        listimpl = (Class<? extends ConsList<Integer>>) Class.forName("migl.util.ConsListImpl");
-    }
+    private ConsList<Integer> list;
 
     @Before
-    public void init() throws InstantiationException, IllegalAccessException {
-        list = listimpl.newInstance();
+    public void init() {
+        list = ConsListFactory.nil();
     }
 
     @Test
