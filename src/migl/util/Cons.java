@@ -111,7 +111,7 @@ public class Cons<L, R> {
      * @return an empty cons of the expected type.
      */
     public static final <U, V> Cons<U, V> nil() {
-        return new Cons<U, V>();
+        return new Cons<>();
     }
 
 }
