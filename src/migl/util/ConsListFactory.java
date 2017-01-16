@@ -33,7 +33,7 @@ public final class ConsListFactory {
      *            an object
      * @return a list containing only t
      */
-    public static <T> ConsList<T> signleton(T t) {
+    public static <T> ConsList<T> singleton(T t) {
         throw new UnsupportedOperationException("Not implemented yet!");
     }
 
@@ -45,7 +45,7 @@ public final class ConsListFactory {
      * @return a list containing those elements
      */
     @SafeVarargs
-    public static <T> ConsList<T> singleton(T... ts) {
+    public static <T> ConsList<T> asList(T... ts) {
         throw new UnsupportedOperationException("Not implemented yet!");
     }
 }
