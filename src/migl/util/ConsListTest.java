@@ -56,9 +56,12 @@ public class ConsListTest {
         list = list.append(2);
         assertEquals(2, list.size());
         assertEquals(1, list.car().intValue());
+        assertEquals(2, list.cdr().car().intValue());
         list = list.append(3);
         assertEquals(3, list.size());
         assertEquals(1, list.car().intValue());
+        assertEquals(2, list.cdr().car().intValue());
+        assertEquals(3, list.cdr().cdr().car().intValue());
     }
 
     @Test
