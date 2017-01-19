@@ -68,4 +68,24 @@ public class MoreConsListTest {
         it.next();
     }
 
+    @Test
+    public void testSingletonFactory() {
+        ConsList<Integer> list2 = ConsListFactory.singleton(5);
+        assertEquals(1, list2.size());
+        assertEquals(5, list2.car().intValue());
+    }
+
+    @Test
+    public void testListFromVarargs() {
+        ConsList<Integer> list2 = ConsListFactory.asList(6, 66, 666);
+        assertEquals(3, list2.size());
+        Iterator<Integer> it = list2.iterator();
+        assertTrue(it.hasNext());
+        assertEquals(6, it.next().intValue());
+        assertTrue(it.hasNext());
+        assertEquals(66, it.next().intValue());
+        assertTrue(it.hasNext());
+        assertEquals(666, it.next().intValue());
+        assertTrue(it.hasNext());
+    }
 }
