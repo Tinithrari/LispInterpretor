@@ -88,4 +88,11 @@ public class MoreConsListTest {
         assertEquals(666, it.next().intValue());
         assertFalse(it.hasNext());
     }
+
+    @Test
+    public void testMap() {
+        ConsList<Integer> list2 = ConsListFactory.asList(6, 66, 666);
+        ConsList<String> list3 = ConsListFactory.asList("6", "66", "666");
+        assertEquals(list2, list3.map(p -> Integer.valueOf(p)));
+    }
 }
