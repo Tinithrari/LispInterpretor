@@ -86,6 +86,6 @@ public class MoreConsListTest {
         assertEquals(66, it.next().intValue());
         assertTrue(it.hasNext());
         assertEquals(666, it.next().intValue());
-        assertTrue(it.hasNext());
+        assertFalse(it.hasNext());
     }
 }
