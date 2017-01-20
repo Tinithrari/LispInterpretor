@@ -23,7 +23,7 @@ public final class ConsListFactory {
      * @return an empty list
      */
     public static <T> ConsList<T> nil() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return new ConsListImpl<T>();
     }
 
     /**
@@ -34,7 +34,7 @@ public final class ConsListFactory {
      * @return a list containing only t
      */
     public static <T> ConsList<T> singleton(T t) {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        return new ConsListImpl<T>(t);
     }
 
     /**
