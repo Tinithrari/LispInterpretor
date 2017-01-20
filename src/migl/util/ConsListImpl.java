@@ -97,7 +97,7 @@ public class ConsListImpl<E> implements ConsList<E> {
 
     @Override
     public ConsList<E> cdr() {
-        return this.head == null ? null : this.head.cdr();
+        return ((this.head == null) ? null : ((this.head.cdr() == null) ? this : this.head.cdr()));
     }
 
     @Override
