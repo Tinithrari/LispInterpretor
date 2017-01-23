@@ -53,10 +53,6 @@ public class ConsListImpl<E> implements ConsList<E> {
     public ConsList<E> prepend(E e) {
         ConsList<E> newElt;
 
-        // Check the argument
-        if (e == null)
-            throw new IllegalArgumentException("e must be not null");
-
         // If head is not initialized, return
         if (head == null) {
             this.head = new Cons<>(e, null);
@@ -72,10 +68,6 @@ public class ConsListImpl<E> implements ConsList<E> {
     @Override
     public ConsList<E> append(E e) {
         ConsListImpl<E> newElt;
-
-        // Check the argument
-        if (e == null)
-            throw new IllegalArgumentException("e must be not null");
 
         if (this.head != null && this.head.cdr() != null) {
             this.head.cdr().append(e);
