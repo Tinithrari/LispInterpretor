@@ -110,8 +110,18 @@ public class ConsListImpl<E> implements ConsList<E> {
 
     @Override
     public <T> ConsList<T> map(Function<E, T> f) {
-        // TODO Auto-generated method stub
-        return null;
+        ConsListImpl<T> convertedList;
+
+        if (f == null)
+            throw new IllegalArgumentException("The function must be initialized");
+
+        convertedList = new ConsListImpl<>();
+
+        for (E e : this) {
+            convertedList.append(f.apply(e));
+        }
+
+        return convertedList;
     }
 
     @Override
