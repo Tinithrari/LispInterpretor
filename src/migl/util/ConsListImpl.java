@@ -84,7 +84,7 @@ public class ConsListImpl<E> implements ConsList<E> {
             if (head == null) {
                 this.head = new Cons<>(e, null);
             } else {
-                newElt = new ConsListImpl<>(new Cons<>(e, null));
+                newElt = new ConsListImpl<>(e);
                 this.head = new Cons<>(this.head.car(), newElt);
             }
         }
