@@ -2,6 +2,7 @@ package migl.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -110,5 +111,26 @@ public class MoreConsListTest {
         ConsList<Object> olist = ConsListFactory.nil();
         olist = olist.prepend("Truc").prepend(null).prepend(45);
         assertEquals("(45, null, Truc)", olist.toString());
+    }
+
+    @Test
+    public void testEqualsWithNull() {
+        assertNotEquals(list, null);
+    }
+
+    @Test
+    public void testEqualsWithDifferentLists() {
+        list = list.prepend(10).prepend(9).prepend(8);
+        ConsList<Integer> list2 = ConsListFactory.nil();
+        list2 = list2.prepend(8).prepend(9).prepend(10);
+        assertNotEquals(list, list2);
+    }
+
+    @Test
+    public void testEqualsWithDifferentTypes() {
+        list = list.prepend(10).prepend(9).prepend(8);
+        ConsList<String> list2 = ConsListFactory.nil();
+        list2 = list2.prepend("10").prepend("9").prepend("8");
+        assertNotEquals(list, list2);
     }
 }
