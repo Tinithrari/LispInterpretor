@@ -1,6 +1,7 @@
 package migl.util;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * An iterator for the conslist
@@ -37,7 +38,7 @@ public class ConsListIterator<E> implements Iterator<E> {
     public E next() {
         // If there is no next element, throw exception
         if (!this.hasNext())
-            throw new IllegalStateException("The list has been iterate");
+            throw new NoSuchElementException("The list has been iterate");
 
         // Update the cursor
         this.cursor = this.cursor.cdr();
