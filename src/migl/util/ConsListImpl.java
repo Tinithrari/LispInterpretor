@@ -117,7 +117,7 @@ public class ConsListImpl<E> implements ConsList<E> {
 
     @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         boolean first = true;
         ConsListImpl<E> ptr = this;
         buffer.append("(");
