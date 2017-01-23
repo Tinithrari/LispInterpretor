@@ -95,4 +95,13 @@ public class MoreConsListTest {
         ConsList<String> list3 = ConsListFactory.asList("6", "66", "666");
         assertEquals(list2, list3.map(p -> Integer.valueOf(p)));
     }
+
+    @Test
+    public void testAdditionalToString() {
+        list = list.prepend(10).prepend(9).prepend(8);
+        assertEquals("(8, 9, 10)", list.toString());
+        ConsList<Object> olist = ConsListFactory.nil();
+        olist = olist.prepend("Truc").prepend(list).prepend(45);
+        assertEquals("(45, (8, 9, 10), Truc)", olist.toString());
+    }
 }
