@@ -44,8 +44,9 @@ public class ConsListImpl<E> implements ConsList<E> {
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        return null;
+        if (this.isEmpty())
+            throw new IllegalStateException("The list must be initialized to get an iterator");
+        return new ConsListIterator<>(this);
     }
 
     @Override
@@ -63,7 +64,7 @@ public class ConsListImpl<E> implements ConsList<E> {
         }
 
         // Create a new List header
-        newElt = new ConsListImpl<E>(new Cons<>(e, this));
+        newElt = new ConsListImpl<>(new Cons<>(e, this));
 
         return newElt;
     }
@@ -138,5 +139,4 @@ public class ConsListImpl<E> implements ConsList<E> {
         buffer.append(")");
         return buffer.toString();
     }
-
 }
