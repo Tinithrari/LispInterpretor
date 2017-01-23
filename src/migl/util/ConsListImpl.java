@@ -22,6 +22,12 @@ public class ConsListImpl<E> implements ConsList<E> {
         this.head = null;
     }
 
+    /**
+     * Construct a ConsList with an element inside of it
+     * 
+     * @param e
+     *            The element to add into the list
+     */
     public ConsListImpl(E e) {
         this.head = new Cons<>(e, null);
     }
@@ -32,7 +38,7 @@ public class ConsListImpl<E> implements ConsList<E> {
      * @param head
      */
     private ConsListImpl(Cons<E, ConsListImpl<E>> head) {
-        assert (head != null);
+        assert head != null;
         this.head = head;
     }
 
@@ -77,8 +83,8 @@ public class ConsListImpl<E> implements ConsList<E> {
             if (head == null) {
                 this.head = new Cons<>(e, null);
             } else {
-                newElt = new ConsListImpl<E>(new Cons<>(e, null));
-                this.head = new Cons<E, ConsListImpl<E>>(this.head.car(), newElt);
+                newElt = new ConsListImpl<>(new Cons<>(e, null));
+                this.head = new Cons<>(this.head.car(), newElt);
             }
         }
 
@@ -97,7 +103,7 @@ public class ConsListImpl<E> implements ConsList<E> {
 
     @Override
     public ConsList<E> cdr() {
-        return ((this.head == null) ? null : ((this.head.cdr() == null) ? this : this.head.cdr()));
+        return (this.head == null) ? null : ((this.head.cdr() == null) ? this : this.head.cdr());
     }
 
     @Override

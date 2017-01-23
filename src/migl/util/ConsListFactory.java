@@ -23,7 +23,7 @@ public final class ConsListFactory {
      * @return an empty list
      */
     public static <T> ConsList<T> nil() {
-        return new ConsListImpl<T>();
+        return new ConsListImpl<>();
     }
 
     /**
@@ -34,7 +34,7 @@ public final class ConsListFactory {
      * @return a list containing only t
      */
     public static <T> ConsList<T> singleton(T t) {
-        return new ConsListImpl<T>(t);
+        return new ConsListImpl<>(t);
     }
 
     /**
