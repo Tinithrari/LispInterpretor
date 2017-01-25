@@ -50,7 +50,7 @@ public final class ConsListFactory {
         ConsListImpl<T> list = new ConsListImpl<>();
 
         for (T t : ts)
-            list.append(t);
+            list = (ConsListImpl<T>) list.append(t);
 
         return list;
     }

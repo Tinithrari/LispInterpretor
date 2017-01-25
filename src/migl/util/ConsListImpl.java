@@ -29,7 +29,7 @@ public class ConsListImpl<E> implements ConsList<E> {
      *            The element to add into the list
      */
     public ConsListImpl(E e) {
-        this.head = new Cons<>(e, null);
+        this.head = new Cons<>(e, new ConsListImpl<E>());
     }
 
     /**
@@ -44,43 +44,25 @@ public class ConsListImpl<E> implements ConsList<E> {
 
     @Override
     public Iterator<E> iterator() {
-        if (this.isEmpty())
-            throw new IllegalStateException("The list must be initialized to get an iterator");
         return new ConsListIterator<>(this);
     }
 
     @Override
     public ConsList<E> prepend(E e) {
-        ConsList<E> newElt;
-
-        // If head is not initialized, return
-        if (head == null) {
-            this.head = new Cons<>(e, null);
-            return this;
-        }
-
-        // Create a new List header
-        newElt = new ConsListImpl<>(new Cons<>(e, this));
-
-        return newElt;
+        return new ConsListImpl<>(new Cons<>(e, this));
     }
 
     @Override
     public ConsList<E> append(E e) {
-        ConsListImpl<E> newElt;
-
-        if (this.head != null && this.head.cdr() != null) {
+        if (this.head == null)
+            return prepend(e);
+        if (this.head.cdr().head != null) {
             this.head.cdr().append(e);
-        } else {
-            // If head is not initialized, return
-            if (head == null) {
-                this.head = new Cons<>(e, null);
-            } else {
-                newElt = new ConsListImpl<>(e);
-                this.head = new Cons<>(this.head.car(), newElt);
-            }
+            return this;
         }
-
+        ConsListImpl<E> newElt = new ConsListImpl<>(e);
+        newElt = (ConsListImpl<E>) newElt.prepend(car());
+        this.head = newElt.head;
         return this;
     }
 
@@ -103,9 +85,7 @@ public class ConsListImpl<E> implements ConsList<E> {
     public int size() {
         if (head == null)
             return 0;
-        if (head.cdr() == null)
-            return 1;
-        return 1 + this.head.cdr().size();
+        return 1 + this.cdr().size();
     }
 
     @Override
@@ -118,27 +98,50 @@ public class ConsListImpl<E> implements ConsList<E> {
         convertedList = new ConsListImpl<>();
 
         for (E e : this) {
-            convertedList.append(f.apply(e));
+            convertedList = (ConsListImpl<T>) convertedList.append(f.apply(e));
         }
 
         return convertedList;
     }
 
+    private String getContent(boolean first) {
+        if (this.head == null)
+            return "";
+        return (first ? this.car() : (", " + this.car())) + ((ConsListImpl<E>) this.cdr()).getContent(false);
+    }
+
     @Override
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
-        boolean first = true;
-        ConsListImpl<E> ptr = this;
-        buffer.append("(");
+        return "(" + getContent(true) + ")";
+    }
 
-        for (; ptr != null && ptr.head != null; ptr = ptr.head.cdr()) {
-            if (!first)
-                buffer.append(", ");
-            buffer.append(ptr.car());
-            first = false;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((head == null) ? 0 : head.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof ConsList))
+            return false;
+        ConsListImpl<E> other = (ConsListImpl<E>) obj;
+
+        if (this.head == null) {
+            if (other.head == null) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        buffer.append(")");
-        return buffer.toString();
+        return this.head.equals(other.head);
     }
+
 }

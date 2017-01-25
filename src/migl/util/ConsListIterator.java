@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 public class ConsListIterator<E> implements Iterator<E> {
 
     private ConsList<E> cursor;
+    private boolean last;
 
     /**
      * constructor of the conslist
@@ -22,16 +23,17 @@ public class ConsListIterator<E> implements Iterator<E> {
      *            The list to iterate
      */
     public ConsListIterator(ConsList<E> list) {
-        if (list == null || list.isEmpty())
-            throw new IllegalArgumentException("The list must be initialized and not empty");
+        if (list == null)
+            throw new IllegalArgumentException("The list must be initialized");
 
         // Initialize the list reference
         this.cursor = list;
+        last = false;
     }
 
     @Override
     public boolean hasNext() {
-        return this.cursor.cdr() != null;
+        return this.cursor.size() != 0;
     }
 
     @Override
@@ -40,11 +42,13 @@ public class ConsListIterator<E> implements Iterator<E> {
         if (!this.hasNext())
             throw new NoSuchElementException("The list has been iterate");
 
+        E elt = cursor.car();
+
         // Update the cursor
         this.cursor = this.cursor.cdr();
 
         // Return the element
-        return this.cursor.car();
+        return elt;
     }
 
 }
