@@ -1,5 +1,6 @@
 package migl.util;
 
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 /**
@@ -73,4 +74,21 @@ public interface ConsList<E> extends Iterable<E> {
      */
     <T> ConsList<T> map(Function<E, T> f);
 
+    /**
+     * Performs a reduction on the elements of this list, using the provided
+     * identity value and an associative accumulation function, and returns the
+     * reduced value.
+     * 
+     * @param identity
+     *            the identity value for the accumulating function
+     * @param accumulator
+     *            an associative, stateless function for combining two values
+     * @return the result of the reduction
+     */
+    default E reduce(E identity, BinaryOperator<E> accumulator) {
+        E result = identity;
+        for (E element : this)
+            result = accumulator.apply(result, element);
+        return result;
+    }
 }
