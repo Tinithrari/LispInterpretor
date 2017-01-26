@@ -1,4 +1,4 @@
-package migl.util;
+package migl.lisp;
 
 import org.junit.Before;
 

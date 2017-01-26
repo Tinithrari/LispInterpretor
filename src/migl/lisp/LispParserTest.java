@@ -1,4 +1,4 @@
-package migl.util;
+package migl.lisp;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
+import migl.util.ConsList;
+import migl.util.ConsListFactory;
 
 /**
  * The aim of those tests is to check that a basic lisp String can be translated
