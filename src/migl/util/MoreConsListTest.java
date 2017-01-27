@@ -100,17 +100,17 @@ public class MoreConsListTest {
     @Test
     public void testAdditionalToString() {
         list = list.prepend(10).prepend(9).prepend(8);
-        assertEquals("(8, 9, 10)", list.toString());
+        assertEquals("(8 9 10)", list.toString());
         ConsList<Object> olist = ConsListFactory.nil();
         olist = olist.prepend("Truc").prepend(list).prepend(45);
-        assertEquals("(45, (8, 9, 10), Truc)", olist.toString());
+        assertEquals("(45 (8 9 10) Truc)", olist.toString());
     }
 
     @Test
     public void testAllowNullInList() {
         ConsList<Object> olist = ConsListFactory.nil();
         olist = olist.prepend("Truc").prepend(null).prepend(45);
-        assertEquals("(45, null, Truc)", olist.toString());
+        assertEquals("(45 null Truc)", olist.toString());
     }
 
     @Test
