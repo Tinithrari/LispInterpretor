@@ -88,6 +88,6 @@ public class ConsListTest {
     public void testToStringTwoElements() {
         list = list.prepend(2);
         list = list.prepend(1);
-        assertEquals("(1, 2)", list.toString());
+        assertEquals("(1 2)", list.toString());
     }
 }

@@ -10,13 +10,13 @@ public class ConsTest {
     @Test
     public void testNilCons() {
         Cons<String, String> c1 = Cons.nil();
-        assertEquals("( null . null )", c1.toString());
+        assertEquals("(null . null)", c1.toString());
     }
 
     @Test
     public void testSimpleCons() {
         Cons<String, String> c1 = new Cons<>("a", "b");
-        assertEquals("( a . b )", c1.toString());
+        assertEquals("(a . b)", c1.toString());
         assertEquals("a", c1.car());
         assertEquals("b", c1.cdr());
     }
@@ -24,7 +24,7 @@ public class ConsTest {
     @Test
     public void testNestedCons() {
         Cons<String, Cons<String, String>> c1 = new Cons<>("a", new Cons<>("b", "c"));
-        assertEquals("( a . ( b . c ) )", c1.toString());
+        assertEquals("(a . (b . c))", c1.toString());
     }
 
     @Test
