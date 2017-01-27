@@ -1,109 +1,96 @@
 <project name="tdd" default="tests" basedir="." xmlns:sonar="antlib:org.sonar.ant" xmlns:jacoco="antlib:org.jacoco.ant">
-       <property name="project.java.version" value="1.8"/>
-       <property name="encoding" value="UTF-8"/>
-       <property name="sonar.login" value="YOUR SONAR TOKEN HERE" />
-       <!-- LE RESTE DOIT ETRE BON -->
-       <property name="build" value="build" />
-       <property name="testreports" value="testreports" />
-       <property name="src" value="src" />
-      
-       <!-- Define the SonarQube global properties (the most usual way is to pass these properties via the command line) -->
-       <property name="sonar.host.url" value="https://forge.univ-artois.fr/sonar" />
-       <property name="sonar.projectKey" value="${etudiant}:2017:MyLisp" />
-       <property name="sonar.projectName" value="${etudiant} Lisp 17" />
-       <property name="sonar.projectVersion" value="1.0" />
-       <property name="sonar.java.source" value="${project.java.version}" />
-       <property name="sonar.java.binaries" value="build" />
-       <property name="sonar.java.libraries" value="lib/*.jar" />
-       <property name="sonar.sources" value="src" />
-       <property name="sonar.exclusions" value="**/*Test*" />
-       <property name="sonar.tests" value="TDD2017TESTS/src" />
-       <property name="sonar.junit.reportsPath" value="${testreports}"/>
-       <property name="sonar.jacoco.reportPath" value="${testreports}/jacoco.exec"/>
-       <property name="sonar.web.javaAdditionalOpts" value="-Dhttps.proxyHost=cache-etu.univ-artois.fr -Dhttps.proxyPort=3128" />
-       <target name="prepare" 
-	       description="Cree les repertoires et initialise certaines valeurs">
-         <!-- Create the time stamp -->
-         <tstamp/>
-         <mkdir dir="${build}" />
-         <mkdir dir="${testreports}"/>
-       </target>
+	<property name="project.java.version" value="1.8" />
+	<property name="encoding" value="UTF-8" />
+	<property name="sonar.login" value="YOUR SONAR TOKEN HERE" />
+	<!-- LE RESTE DOIT ETRE BON -->
+	<property name="build" value="build" />
+	<property name="testreports" value="testreports" />
+	<property name="src" value="src" />
 
-       <path id="mypath">
-          <pathelement location="${build}"/>
-          <fileset dir="lib">
-              <include name="*.jar" />
-          </fileset>
-       </path>
+	<!-- Define the SonarQube global properties (the most usual way is to pass these properties via the command line) -->
+	<property name="sonar.host.url" value="https://forge.univ-artois.fr/sonar" />
+	<property name="sonar.projectKey" value="${etudiant}:2017:MyLisp" />
+	<property name="sonar.projectName" value="${etudiant} Lisp 17" />
+	<property name="sonar.projectVersion" value="1.0" />
+	<property name="sonar.java.source" value="${project.java.version}" />
+	<property name="sonar.java.binaries" value="build" />
+	<property name="sonar.java.libraries" value="lib/*.jar" />
+	<property name="sonar.sources" value="src" />
+	<property name="sonar.exclusions" value="**/*Test*" />
+	<property name="sonar.tests" value="TDD2017TESTS/src" />
+	<property name="sonar.junit.reportsPath" value="${testreports}" />
+	<property name="sonar.jacoco.reportPath" value="${testreports}/jacoco.exec" />
+	<property name="sonar.web.javaAdditionalOpts" value="-Dhttps.proxyHost=cache-etu.univ-artois.fr -Dhttps.proxyPort=3128" />
+	<target name="prepare" description="Cree les repertoires et initialise certaines valeurs">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<mkdir dir="${build}" />
+		<mkdir dir="${testreports}" />
+	</target>
 
-    <target name="build" description="Compile les fichiers Java"
-          depends="prepare">
-    <javac
-        includeantruntime="true"
-        srcdir="${src}"
-        destdir="${build}"
-            source="${project.java.version}"
-        debug="true"
-        encoding= "${encoding}"
-      >
-    <classpath refid="mypath"/>
-    </javac>
-  </target>
+	<path id="mypath">
+		<pathelement location="${build}" />
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
 
-  <target name="clean"
-	  description="Efface tous les fichiers generes">
-     <!-- Delete directory trees -->
-     <delete dir="${build}" />
-     <delete dir="${testreports}"/>
-     <delete dir="${target}"/>
-  </target>
+	<target name="build" description="Compile les fichiers Java" depends="prepare">
+		<javac includeantruntime="true" srcdir="${src}" destdir="${build}" source="${project.java.version}" debug="true" encoding="${encoding}">
+			<classpath refid="mypath" />
+		</javac>
+	</target>
+
+	<target name="clean" description="Efface tous les fichiers generes">
+		<!-- Delete directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${testreports}" />
+		<delete dir="${target}" />
+	</target>
 
 
-   <target name="tests" description="test de l'application web à l'aide de JWebUnit" depends="build">
-      <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-        <classpath path="lib/jacocoant.jar"/>
-      </taskdef>
-      <javac
-        includeantruntime="true"
-        srcdir="TDD2017TESTS/src"
-        destdir="${build}"
-            source="${project.java.version}"
-        debug="true"
-        encoding= "${encoding}"
-      >
-        <classpath refid="mypath"/>
-      </javac>
-      <jacoco:coverage  destfile="${sonar.jacoco.reportPath}">
-      <junit fork="yes" forkmode="once" printsummary="yes" haltonfailure="no" failureproperty="tests.failure">
-      <classpath refid="mypath"/>
-      <formatter type="plain" usefile="false"/> 
-      <formatter type="xml"/>
-      <batchtest fork="yes" todir="${testreports}">
-        <fileset dir="${build}">
-             <include name="**/TDD*.class"/>
-             <include name="**/*Test*.class"/>
-             <include name="**/PeterNorvig*.class"/>
-             <exclude name="**/AllTests.class"/>
-             <exclude name="**/Abstract*.class"/>
-        </fileset>
-      </batchtest>
-    </junit>
-    </jacoco:coverage>
-   </target>
- 
+	<target name="tests" description="test de l'application web à l'aide de JWebUnit" depends="build">
+		<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+			<classpath path="lib/jacocoant.jar" />
+		</taskdef>
+		<javac includeantruntime="true" srcdir="TDD2017TESTS/src" destdir="${build}" source="${project.java.version}" debug="true" encoding="${encoding}">
+			<classpath refid="mypath" />
+		</javac>
+		<copy todir="${build}">
+			<fileset dir="TDD2017TESTS/src">
+				<include name="**/*.story" />
+			</fileset>
+		</copy>
+		<jacoco:coverage destfile="${sonar.jacoco.reportPath}">
+			<junit fork="yes" forkmode="once" printsummary="false" haltonfailure="no" failureproperty="tests.failure">
+				<classpath refid="mypath" />
+				<formatter type="plain" usefile="false" />
+				<formatter type="xml" />
+				<batchtest fork="yes" todir="${testreports}">
+					<fileset dir="${build}">
+						<include name="**/TDD*.class" />
+						<include name="**/*Test*.class" />
+						<include name="**/PeterNorvig*.class" />
+						<exclude name="**/AllTests.class" />
+						<exclude name="**/Abstract*.class" />
+					</fileset>
+				</batchtest>
+			</junit>
+		</jacoco:coverage>
+	</target>
 
-   
-   <target name="m1" description="Verification des projets de TDD2017" 
-	   depends="clean,build,tests"/>
 
-   <!-- Define the SonarQube target -->
-   <target name="sonar" depends="m1" description="Analyse le code avec SonarQube">
-    <taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
-         <classpath path="lib/sonarqube-ant-task-2.5.jar" />
-    </taskdef>
-    <!-- Execute the SonarQube analysis -->
-    <sonar:sonar/>
-    <fail message="Il reste des tests qui ne passent pas !" if="tests.failure"/>
-</target>
+
+	<target name="m1" description="Verification des projets de TDD2017" depends="clean,build,tests" />
+
+	<!-- Define the SonarQube target -->
+	<target name="sonar" depends="m1" description="Analyse le code avec SonarQube">
+		<taskdef uri="antlib:org.sonar.ant" resource="org/sonar/ant/antlib.xml">
+			<classpath path="lib/sonarqube-ant-task-2.5.jar" />
+		</taskdef>
+		<!-- Execute the SonarQube analysis -->
+		<sonar:sonar />
+		<fail message="Il reste des tests qui ne passent pas !" if="tests.failure" />
+	</target>
 </project>
 
