@@ -71,7 +71,7 @@ public class Cons<L, R> {
      */
     @Override
     public String toString() {
-        return "( " + car + " . " + cdr + " )";
+        return "(" + car + " . " + cdr + ")";
     }
 
     @Override
