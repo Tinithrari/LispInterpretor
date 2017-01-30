@@ -14,12 +14,14 @@ import java.util.function.Function;
 public class ConsListImpl<E> implements ConsList<E> {
 
     private Cons<E, ConsListImpl<E>> head;
+    private int s;
 
     /**
      * Default Constructor
      */
     public ConsListImpl() {
         this.head = null;
+        this.s = 0;
     }
 
     /**
@@ -30,6 +32,7 @@ public class ConsListImpl<E> implements ConsList<E> {
      */
     public ConsListImpl(E e) {
         this.head = new Cons<>(e, new ConsListImpl<E>());
+        this.s = 1;
     }
 
     /**
@@ -40,6 +43,7 @@ public class ConsListImpl<E> implements ConsList<E> {
     private ConsListImpl(Cons<E, ConsListImpl<E>> head) {
         assert head != null;
         this.head = head;
+        this.s = head.cdr().s + 1;
     }
 
     @Override
@@ -58,11 +62,13 @@ public class ConsListImpl<E> implements ConsList<E> {
             return prepend(e);
         if (this.head.cdr().head != null) {
             this.head.cdr().append(e);
+            this.s++;
             return this;
         }
         ConsListImpl<E> newElt = new ConsListImpl<>(e);
         newElt = (ConsListImpl<E>) newElt.prepend(car());
         this.head = newElt.head;
+        this.s++;
         return this;
     }
 
@@ -81,17 +87,9 @@ public class ConsListImpl<E> implements ConsList<E> {
         return (this.head == null) ? null : ((this.head.cdr() == null) ? this : this.head.cdr());
     }
 
-    private static int count(ConsListImpl consList) {
-        if (consList.head == null)
-            return 0;
-        return 1 + count((ConsListImpl) consList.head.cdr());
-    }
-
     @Override
     public int size() {
-        if (head == null)
-            return 0;
-        return 1 + count(head.cdr());
+        return this.s;
     }
 
     @Override
