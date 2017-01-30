@@ -138,11 +138,7 @@ public class ConsListImpl<E> implements ConsList<E> {
         ConsListImpl<E> other = (ConsListImpl<E>) obj;
 
         if (this.head == null) {
-            if (other.head == null) {
-                return true;
-            } else {
-                return false;
-            }
+            return other.head == null;
         }
 
         return this.head.equals(other.head);

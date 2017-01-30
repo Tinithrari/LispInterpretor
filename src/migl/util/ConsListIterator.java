@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 public class ConsListIterator<E> implements Iterator<E> {
 
     private ConsList<E> cursor;
-    private boolean last;
 
     /**
      * constructor of the conslist
@@ -28,7 +27,6 @@ public class ConsListIterator<E> implements Iterator<E> {
 
         // Initialize the list reference
         this.cursor = list;
-        last = false;
     }
 
     @Override
