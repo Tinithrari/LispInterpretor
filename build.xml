@@ -1,6 +1,6 @@
 <project name="tdd" default="tests" basedir="." xmlns:sonar="antlib:org.sonar.ant" xmlns:jacoco="antlib:org.jacoco.ant">	<property name="project.java.version" value="1.8" />
 	<property name="encoding" value="UTF-8" />
-	<property name="sonar.login" value="YOUR SONAR TOKEN HERE" />
+	<property name="sonar.login" value="4c7e9e0107b6e2a664b173328677a6c41ac072ad" />
 	<!-- LE RESTE DOIT ETRE BON -->
 	<property name="build" value="build" />
 	<property name="testreports" value="testreports" />
