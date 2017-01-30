@@ -107,7 +107,7 @@ public class ConsListImpl<E> implements ConsList<E> {
     private String getContent(boolean first) {
         if (this.head == null)
             return "";
-        return (first ? this.car() : (", " + this.car())) + ((ConsListImpl<E>) this.cdr()).getContent(false);
+        return (first ? this.car() : (" " + this.car())) + ((ConsListImpl<E>) this.cdr()).getContent(false);
     }
 
     @Override
