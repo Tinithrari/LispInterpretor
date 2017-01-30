@@ -81,11 +81,17 @@ public class ConsListImpl<E> implements ConsList<E> {
         return (this.head == null) ? null : ((this.head.cdr() == null) ? this : this.head.cdr());
     }
 
+    private static int count(ConsListImpl consList) {
+        if (consList.head == null)
+            return 0;
+        return 1 + count((ConsListImpl) consList.head.cdr());
+    }
+
     @Override
     public int size() {
         if (head == null)
             return 0;
-        return 1 + this.cdr().size();
+        return 1 + count(head.cdr());
     }
 
     @Override
