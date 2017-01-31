@@ -91,4 +91,18 @@ public interface ConsList<E> extends Iterable<E> {
             result = accumulator.apply(result, element);
         return result;
     }
+
+    /**
+     * Translates the ConsList as an array of Object. The type of the
+     * 
+     * @return
+     */
+    default Object[] toArray() {
+        Object[] array = new Object[size()];
+        int i = 0;
+        for (Object o : this) {
+            array[i++] = o;
+        }
+        return array;
+    }
 }
