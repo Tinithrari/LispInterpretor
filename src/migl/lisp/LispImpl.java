@@ -7,7 +7,7 @@ import migl.util.ConsListFactory;
 
 public class LispImpl implements Lisp {
 
-    private static Object getEltValue(String expr) {
+    private static Object getEltValue(String expr) throws LispError {
         try {
             return BigInteger.valueOf(Long.parseLong(expr));
         } catch (NumberFormatException ex) {
@@ -17,13 +17,15 @@ public class LispImpl implements Lisp {
                 try {
                     return LispBoolean.valueOf(expr);
                 } catch (IllegalArgumentException ex3) {
+                    if (expr.contains(")"))
+                        throw new LispError("Missing '('");
                     return expr;
                 }
             }
         }
     }
 
-    private static ConsList<Object> createList(String expr) {
+    private static ConsList<Object> createList(String expr) throws LispError {
         ConsList<Object> list = ConsListFactory.nil();
         StringBuilder bStr = new StringBuilder();
 
@@ -35,8 +37,8 @@ public class LispImpl implements Lisp {
                     bStr = new StringBuilder();
                 }
             } else if (expr.charAt(i) == '(' && bStr.toString().length() == 0) {
-                int parentheseLevel = 0;
-                for (int j = i + 1; j < expr.length() && !(expr.charAt(j) == ')' && parentheseLevel == 0); j++) {
+                int parentheseLevel = 0, j;
+                for (j = i + 1; j < expr.length() && !(expr.charAt(j) == ')' && parentheseLevel == 0); j++) {
                     bStr.append(expr.charAt(j));
                     if (expr.charAt(j) == '(') {
                         parentheseLevel++;
@@ -44,6 +46,9 @@ public class LispImpl implements Lisp {
                         parentheseLevel--;
                     }
                 }
+
+                if (expr.length() == j)
+                    throw new LispError("Missing ')'");
                 list = list.append(createList(bStr.toString()));
                 i += bStr.toString().length() + 1;
                 bStr = new StringBuilder();
@@ -61,10 +66,13 @@ public class LispImpl implements Lisp {
 
     @Override
     public Object parse(String expr) throws LispError {
-        if (expr.charAt(0) != '(')
+        if (expr.charAt(0) != '(') {
             return getEltValue(expr);
-        else {
+        } else {
             ConsList<Object> list;
+            if (!expr.endsWith(")")) {
+                throw new LispError("Missing ')'");
+            }
             list = createList(expr.substring(1, expr.length() - 1));
             return list;
         }
