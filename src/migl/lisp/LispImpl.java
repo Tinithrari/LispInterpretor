@@ -5,6 +5,12 @@ import java.math.BigInteger;
 import migl.util.ConsList;
 import migl.util.ConsListFactory;
 
+/**
+ * Implémentation Lisp
+ * 
+ * @author xavier_heugue
+ *
+ */
 public class LispImpl implements Lisp {
 
     private static Object getEltValue(String expr) throws LispError {
@@ -37,13 +43,17 @@ public class LispImpl implements Lisp {
                     bStr = new StringBuilder();
                 }
             } else if (expr.charAt(i) == '(' && bStr.toString().length() == 0) {
-                int parentheseLevel = 0, j;
+                int parentheseLevel = 0;
+                int j;
                 for (j = i + 1; j < expr.length() && !(expr.charAt(j) == ')' && parentheseLevel == 0); j++) {
                     bStr.append(expr.charAt(j));
-                    if (expr.charAt(j) == '(') {
+                    switch (expr.charAt(j)) {
+                    case '(':
                         parentheseLevel++;
-                    } else if (expr.charAt(j) == ')') {
+                        break;
+                    case ')':
                         parentheseLevel--;
+                        break;
                     }
                 }
 
