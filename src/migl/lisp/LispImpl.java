@@ -54,6 +54,8 @@ public class LispImpl implements Lisp {
                     case ')':
                         parentheseLevel--;
                         break;
+                    default:
+                        break;
                     }
                 }
 
