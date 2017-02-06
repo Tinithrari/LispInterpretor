@@ -32,7 +32,7 @@ public class LispImpl implements Lisp {
         for (int i = 0; i < expr.length(); i++) {
             if (expr.charAt(i) == ' ') {
                 String str = bStr.toString();
-                if (!str.equals("")) {
+                if (!"".equals(str)) {
                     list = list.append(getEltValue(str));
                     bStr = new StringBuilder();
                 }
