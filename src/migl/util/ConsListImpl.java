@@ -133,8 +133,9 @@ public class ConsListImpl<E> implements ConsList<E> {
             return true;
         if (obj == null)
             return false;
-        if (!(obj instanceof ConsList))
+        if (!(obj instanceof ConsListImpl))
             return false;
+
         ConsListImpl<E> other = (ConsListImpl<E>) obj;
 
         if (this.head == null) {
