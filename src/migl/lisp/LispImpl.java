@@ -35,7 +35,6 @@ public class LispImpl implements Lisp {
         ConsList<Object> list = ConsListFactory.nil();
         System.out.println(expr);
         StringBuilder bStr = new StringBuilder();
-        char lastMeetedChar = '\0';
         int i;
 
         for (i = 1; i < expr.length() && expr.charAt(i) != ')'; i++) {
@@ -47,7 +46,6 @@ public class LispImpl implements Lisp {
                     throw new LispError("Missing )");
                 list = list.append(parseList(expr.substring(i, fin + 1), true));
                 i = fin;
-                lastMeetedChar = ')';
             } else if (expr.charAt(i) == ' ' || expr.charAt(i) == '\t') {
                 if (bStr.length() != 0) {
                     list = list.append(getEltValue(bStr.toString()));
@@ -55,7 +53,6 @@ public class LispImpl implements Lisp {
                 }
             } else {
                 bStr.append(expr.charAt(i));
-                lastMeetedChar = expr.charAt(i);
             }
         }
         if (i == expr.length())
