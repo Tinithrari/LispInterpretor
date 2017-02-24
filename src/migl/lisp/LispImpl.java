@@ -1,7 +1,10 @@
 package migl.lisp;
 
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 
+import migl.lisp.expr.LispExpression;
+import migl.lisp.expr.LispExpressionFactory;
 import migl.util.ConsList;
 import migl.util.ConsListFactory;
 
@@ -33,7 +36,6 @@ public class LispImpl implements Lisp {
 
     private static ConsList<Object> parseList(String expr, boolean sublist) throws LispError {
         ConsList<Object> list = ConsListFactory.nil();
-        System.out.println(expr);
         StringBuilder bStr = new StringBuilder();
         int i;
 
@@ -86,7 +88,33 @@ public class LispImpl implements Lisp {
 
     @Override
     public Object evaluate(Object ex) throws LispError {
-        return null;
+        LispExpression expr;
+        ConsList<Object> res;
+        if (ex instanceof ConsList) {
+            ConsList<Object> list = (ConsList<Object>) ex;
+            try {
+                expr = LispExpressionFactory.createExpression(list);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                    | NoSuchMethodException | SecurityException e) {
+                throw new LispError("Synthax error", e);
+            }
+        } else if (ex instanceof BigInteger) {
+            BigInteger bint = (BigInteger) ex;
+            expr = LispExpressionFactory.createExpression(bint);
+        } else if (ex instanceof Double) {
+            Double d = (Double) ex;
+            expr = LispExpressionFactory.createExpression(d);
+        } else if (ex instanceof LispBoolean) {
+            LispBoolean lB = (LispBoolean) ex;
+            expr = LispExpressionFactory.createExpression(lB);
+        } else if (ex instanceof String) {
+            String str = (String) ex;
+            expr = LispExpressionFactory.createExpression(str);
+        } else {
+            throw new LispError("Synthax error");
+        }
+
+        return expr.getEvaluation();
     }
 
 }

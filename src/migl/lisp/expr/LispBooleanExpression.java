@@ -1,6 +1,7 @@
 package migl.lisp.expr;
 
 import migl.lisp.LispBoolean;
+import migl.lisp.LispError;
 
 public class LispBooleanExpression implements LispExpression {
 
@@ -11,7 +12,7 @@ public class LispBooleanExpression implements LispExpression {
     }
 
     @Override
-    public Object getEvaluation() {
+    public Object getEvaluation() throws LispError {
         return value;
     }
 

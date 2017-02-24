@@ -2,6 +2,8 @@ package migl.lisp.expr;
 
 import java.math.BigInteger;
 
+import migl.lisp.LispError;
+
 public class BigIntegerExpression implements LispExpression {
 
     private BigInteger value;
@@ -12,8 +14,8 @@ public class BigIntegerExpression implements LispExpression {
     }
 
     @Override
-    public Object getEvaluation() {
-        return value;
+    public Object getEvaluation() throws LispError {
+        return value.intValue();
     }
 
 }

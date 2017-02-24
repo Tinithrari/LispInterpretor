@@ -3,11 +3,12 @@ package migl.lisp.expr;
 import java.math.BigDecimal;
 
 import migl.lisp.LispBoolean;
+import migl.lisp.LispError;
 
 public class Addition extends LispOperator {
 
     @Override
-    public Object getEvaluation() {
+    public Object getEvaluation() throws LispError {
         BigDecimal somme = new BigDecimal(0);
 
         if (this.getListe().isEmpty())
@@ -19,7 +20,7 @@ public class Addition extends LispOperator {
             if (e.getEvaluation() instanceof LispBoolean)
                 throw new IllegalStateException("An addition cannot contain a boolean type");
 
-            somme.add(new BigDecimal(e.getEvaluation().toString()));
+            somme = somme.add(new BigDecimal(e.getEvaluation().toString()));
         }
         return somme;
     }

@@ -1,5 +1,7 @@
 package migl.lisp.expr;
 
+import migl.lisp.LispError;
+
 /**
  * A double considered as an expression
  * 
@@ -14,7 +16,7 @@ public class DoubleExpression implements LispExpression {
     }
 
     @Override
-    public Object getEvaluation() {
+    public Object getEvaluation() throws LispError {
         return value;
     }
 

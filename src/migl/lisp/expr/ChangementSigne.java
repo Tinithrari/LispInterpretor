@@ -2,20 +2,21 @@ package migl.lisp.expr;
 
 import java.math.BigDecimal;
 
+import migl.lisp.LispError;
+
 public class ChangementSigne extends LispOperator {
 
     @Override
-    public void add(LispExpression expr) {
-        if (this.getListe().size() == 1)
-            throw new IllegalStateException("Too many operands");
-        super.add(expr);
-    }
-
-    @Override
-    public Object getEvaluation() {
+    public Object getEvaluation() throws LispError {
         BigDecimal value = new BigDecimal(this.getListe().get(0).getEvaluation().toString());
 
-        return value.multiply(new BigDecimal(-1));
+        if (this.getListe().size() > 2)
+            throw new LispError("Invalid number of operands");
+
+        if (this.getListe().size() == 1)
+            return value.multiply(new BigDecimal(-1));
+        else
+            return value.subtract(new BigDecimal(this.getListe().get(1).getEvaluation().toString()));
     }
 
 }

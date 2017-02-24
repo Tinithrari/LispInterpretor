@@ -2,6 +2,8 @@ package migl.lisp.expr;
 
 import java.math.BigDecimal;
 
+import migl.lisp.LispError;
+
 public class Division extends LispOperator {
 
     @Override
@@ -12,16 +14,17 @@ public class Division extends LispOperator {
     }
 
     @Override
-    public Object getEvaluation() {
+    public Object getEvaluation() throws LispError {
         BigDecimal dividende, diviseur;
 
         dividende = new BigDecimal(this.getListe().get(0).getEvaluation().toString());
         diviseur = new BigDecimal(this.getListe().get(1).getEvaluation().toString());
 
-        if (diviseur.equals(0))
-            throw new IllegalStateException("Division by zero");
+        if (diviseur.doubleValue() == 0d)
+            throw new LispError("Division by zero");
 
-        return dividende.divide(diviseur);
+        return dividende.precision() == 1 && diviseur.precision() == 1 ? dividende.divide(diviseur).intValue()
+                : dividende.divide(diviseur);
     }
 
 }
