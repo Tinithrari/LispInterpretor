@@ -86,7 +86,6 @@ public class LispImpl implements Lisp {
 
     @Override
     public Object evaluate(Object ex) throws LispError {
-        // TODO Auto-generated method stub
         return null;
     }
 
