@@ -108,6 +108,10 @@ public class ConsListImpl<E> implements ConsList<E> {
         return convertedList;
     }
 
+    public Cons<E, ConsListImpl<E>> getHead() {
+        return head;
+    }
+
     private String getContent(boolean first) {
         if (this.head == null)
             return "";

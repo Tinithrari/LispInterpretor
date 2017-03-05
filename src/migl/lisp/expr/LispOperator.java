@@ -3,6 +3,8 @@ package migl.lisp.expr;
 import java.util.ArrayList;
 import java.util.List;
 
+import migl.lisp.LispError;
+
 public abstract class LispOperator implements LispExpression {
 
     private List<LispExpression> liste;
@@ -12,7 +14,7 @@ public abstract class LispOperator implements LispExpression {
     }
 
     @Override
-    public void add(LispExpression expr) {
+    public void add(LispExpression expr) throws LispError {
         if (expr == null)
             throw new IllegalArgumentException("The expression must be non-null");
         liste.add(expr);

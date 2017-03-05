@@ -1,13 +1,17 @@
-package migl.lisp.expr;
+package migl.lisp.expr.math;
 
 import java.math.BigDecimal;
 
 import migl.lisp.LispError;
+import migl.lisp.expr.LispExpression;
+import migl.lisp.expr.LispOperator;
+import migl.lisp.expr.StringExpression;
+import migl.lisp.expr.logic.LispBooleanExpression;
 
 public class Max extends LispOperator {
 
     @Override
-    public void add(LispExpression expr) {
+    public void add(LispExpression expr) throws LispError {
         if (expr instanceof LispBooleanExpression || expr instanceof StringExpression)
             throw new IllegalArgumentException("The argument must be a number");
         super.add(expr);

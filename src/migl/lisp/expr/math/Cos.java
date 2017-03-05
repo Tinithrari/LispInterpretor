@@ -1,11 +1,12 @@
-package migl.lisp.expr;
+package migl.lisp.expr.math;
 
 import java.math.BigDecimal;
 
 import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
+import migl.lisp.expr.LispOperator;
 
-public class Sin extends LispOperator {
+public class Cos extends LispOperator {
 
     @Override
     public Object getEvaluation() throws LispError {
@@ -17,11 +18,11 @@ public class Sin extends LispOperator {
         eval = this.getListe().get(0).getEvaluation();
 
         if (eval instanceof String || eval instanceof LispBoolean)
-            throw new LispError("Invalid type for sin function");
+            throw new LispError("Invalid type for cos function");
 
         number = new BigDecimal(eval.toString());
 
-        return number.precision() == 1 ? Math.sin(number.intValue()) : Math.sin(number.doubleValue());
+        return number.precision() == 1 ? Math.cos(number.intValue()) : Math.cos(number.doubleValue());
     }
 
 }

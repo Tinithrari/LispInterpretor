@@ -1,9 +1,10 @@
-package migl.lisp.expr;
+package migl.lisp.expr.math;
 
 import java.math.BigDecimal;
 
 import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
+import migl.lisp.expr.LispOperator;
 
 public class Pow extends LispOperator {
 

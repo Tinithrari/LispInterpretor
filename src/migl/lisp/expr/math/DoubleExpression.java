@@ -1,6 +1,7 @@
-package migl.lisp.expr;
+package migl.lisp.expr.math;
 
 import migl.lisp.LispError;
+import migl.lisp.expr.LispExpression;
 
 /**
  * A double considered as an expression
@@ -18,6 +19,11 @@ public class DoubleExpression implements LispExpression {
     @Override
     public Object getEvaluation() throws LispError {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return value.toString();
     }
 
 }

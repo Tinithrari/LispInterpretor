@@ -38,7 +38,7 @@ public class LispImpl implements Lisp {
         ConsList<Object> list = ConsListFactory.nil();
         StringBuilder bStr = new StringBuilder();
         int i;
-
+        // TODO Refaire cette fonction
         for (i = 1; i < expr.length() && expr.charAt(i) != ')'; i++) {
             if (expr.charAt(i) == '(') {
                 int fin;
@@ -80,7 +80,7 @@ public class LispImpl implements Lisp {
         if (expr.charAt(0) == '(')
             return parseList(expr, false);
         if (expr.contains(")")) {
-            throw new LispError("OK...Missing )");
+            throw new LispError("Missing )");
         }
 
         return getEltValue(expr);
@@ -89,7 +89,6 @@ public class LispImpl implements Lisp {
     @Override
     public Object evaluate(Object ex) throws LispError {
         LispExpression expr;
-        ConsList<Object> res;
         if (ex instanceof ConsList) {
             ConsList<Object> list = (ConsList<Object>) ex;
             try {
