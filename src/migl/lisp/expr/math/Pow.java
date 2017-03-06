@@ -25,8 +25,11 @@ public class Pow extends LispOperator {
         a = new BigDecimal(eval1.toString());
         b = new BigDecimal(eval2.toString());
 
-        if (b.precision() != 1)
-            throw new LispError("The second member of pow must be an integer");
+        try {
+            b = new BigDecimal(b.intValueExact());
+        } catch (ArithmeticException e) {
+            throw new LispError("The second member of pow must be an integer", e);
+        }
 
         return a.pow(b.intValue()).doubleValue();
     }

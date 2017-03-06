@@ -38,14 +38,20 @@ public class LispImpl implements Lisp {
         ConsList<Object> list = ConsListFactory.nil();
         StringBuilder bStr = new StringBuilder();
         int i;
-        // TODO Refaire cette fonction
+
         for (i = 1; i < expr.length() && expr.charAt(i) != ')'; i++) {
             if (expr.charAt(i) == '(') {
-                int fin;
-                for (fin = i; fin < expr.length() && expr.charAt(fin) != ')'; fin++)
-                    ;
+                int fin, level;
+                for (fin = i, level = 0; fin < expr.length() && !(expr.charAt(fin) == ')' && level == 1); fin++) {
+                    if (expr.charAt(fin) == '(') {
+                        level++;
+                    } else if (expr.charAt(fin) == ')') {
+                        level--;
+                    }
+                }
                 if (fin == expr.length())
                     throw new LispError("Missing )");
+
                 list = list.append(parseList(expr.substring(i, fin + 1), true));
                 i = fin;
             } else if (expr.charAt(i) == ' ' || expr.charAt(i) == '\t') {
@@ -57,9 +63,10 @@ public class LispImpl implements Lisp {
                 bStr.append(expr.charAt(i));
             }
         }
-        if (i == expr.length())
+        if (i == expr.length()) {
+            System.out.println("<" + expr + ">");
             throw new LispError("Missing closing parenthesis");
-        else if (expr.length() != i + 1 && !sublist) {
+        } else if (expr.length() != i + 1 && !sublist) {
             for (i += 1; i < expr.length(); i++)
                 if (expr.charAt(i) != ' ' && expr.charAt(i) != '\t')
                     throw new LispError("Strings contains an unexpected character");
@@ -73,6 +80,7 @@ public class LispImpl implements Lisp {
 
     @Override
     public Object parse(String expr) throws LispError {
+        expr = expr.trim();
         if (expr.length() == 0 || expr == null)
             throw new LispError("Cannot parse empty list");
         if (expr.charAt(0) == ' ' || expr.charAt(0) == '\t')

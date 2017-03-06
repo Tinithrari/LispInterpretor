@@ -16,7 +16,7 @@ public class LesserOrEquals extends LispOperator implements LispLogicExpression 
             throw new LispError("Invalid Argument");
 
         if (this.getListe().size() == 2)
-            throw new LispError("Too many arguments");
+            throw new LispError("Invalid number of operands");
 
         super.add(expr);
     }
@@ -24,7 +24,7 @@ public class LesserOrEquals extends LispOperator implements LispLogicExpression 
     @Override
     public Object getEvaluation() throws LispError {
         if (this.getListe().size() != 2)
-            throw new LispError("Too few arguments");
+            throw new LispError("Invalid number of operands");
         return this.getLogicEvaluation();
     }
 

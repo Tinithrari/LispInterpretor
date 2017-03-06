@@ -34,15 +34,27 @@ public class ConsExpression extends LispOperator {
     public Object getEvaluation() throws LispError {
         if (nbElt < 2)
             throw new LispError("Invalid number of operands");
-        StringBuilder builder = new StringBuilder("(");
+
+        StringBuilder builder = new StringBuilder("");
+
         if (cons.car() == null)
-            builder.append("()");
+            builder.append("(()");
         else
-            builder.append(cons.car().getEvaluation());
+            builder.append("(" + cons.car().getEvaluation());
 
         if (cons.cdr() != null) {
-            builder.append(" . ");
-            builder.append(cons.cdr().getEvaluation());
+            ConsExpression expr2 = null;
+
+            if (cons.cdr() instanceof ConsExpression)
+                expr2 = (ConsExpression) cons.cdr();
+
+            if (expr2 != null && expr2.cons.car() != null && expr2.cons.cdr() == null) {
+                builder.append(" ");
+                builder.append(expr2.cons.car().getEvaluation());
+            } else {
+                builder.append(" . ");
+                builder.append(cons.cdr().getEvaluation());
+            }
         }
 
         builder.append(")");

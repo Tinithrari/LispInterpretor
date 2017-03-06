@@ -11,7 +11,7 @@ public class Division extends LispOperator {
     @Override
     public void add(LispExpression expr) throws LispError {
         if (this.getListe().size() == 2)
-            throw new IllegalStateException("Too manny operands");
+            throw new LispError("Invalid number of operands");
         super.add(expr);
     }
 
