@@ -29,4 +29,9 @@ public class Not extends LispOperator implements LispLogicExpression {
         return ((LispBoolean) expr.getLogicEvaluation()).value() ? LispBoolean.FALSE : LispBoolean.TRUE;
     }
 
+    @Override
+    public String getIdentifier() {
+        return "not";
+    }
+
 }

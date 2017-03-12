@@ -29,4 +29,9 @@ public class If extends LispOperator {
 
         return condition.getLogicEvaluation().value() ? a.getEvaluation() : b.getEvaluation();
     }
+
+    @Override
+    public String getIdentifier() {
+        return "if";
+    }
 }

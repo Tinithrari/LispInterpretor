@@ -114,6 +114,18 @@ public final class LispExpressionFactory {
             return new If();
         case "cons":
             return new ConsExpression();
+        case "define":
+            return new Define();
+        case "lambda":
+            return new Lambda();
+        case "set!":
+            return new Set();
+        case "car":
+            return new Car();
+        case "cdr":
+            return new Cdr();
+        case "list":
+            return new List();
         default:
             return new StringExpression(data);
 

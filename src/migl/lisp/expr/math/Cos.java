@@ -25,4 +25,9 @@ public class Cos extends LispOperator {
         return number.precision() == 1 ? Math.cos(number.intValue()) : Math.cos(number.doubleValue());
     }
 
+    @Override
+    public String getIdentifier() {
+        return "cos";
+    }
+
 }

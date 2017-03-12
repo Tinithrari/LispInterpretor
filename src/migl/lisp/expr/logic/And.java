@@ -33,4 +33,9 @@ public class And extends LispOperator implements LispLogicExpression {
                 ? LispBoolean.TRUE : LispBoolean.FALSE;
     }
 
+    @Override
+    public String getIdentifier() {
+        return "and";
+    }
+
 }

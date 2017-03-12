@@ -19,4 +19,9 @@ public class Quote extends LispOperator {
         return this.getListe().get(0).toString();
     }
 
+    @Override
+    public String getIdentifier() {
+        return "quote";
+    }
+
 }

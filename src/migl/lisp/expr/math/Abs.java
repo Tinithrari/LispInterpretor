@@ -25,4 +25,9 @@ public class Abs extends LispOperator {
         return number.abs();
     }
 
+    @Override
+    public String getIdentifier() {
+        return "abs";
+    }
+
 }

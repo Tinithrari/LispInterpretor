@@ -62,4 +62,9 @@ public class ConsExpression extends LispOperator {
         return builder.toString();
     }
 
+    @Override
+    public String getIdentifier() {
+        return "cons";
+    }
+
 }

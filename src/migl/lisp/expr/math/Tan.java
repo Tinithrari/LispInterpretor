@@ -25,4 +25,9 @@ public class Tan extends LispOperator {
         return number.precision() == 1 ? Math.tan(number.intValue()) : Math.tan(number.doubleValue());
     }
 
+    @Override
+    public String getIdentifier() {
+        return "tan";
+    }
+
 }

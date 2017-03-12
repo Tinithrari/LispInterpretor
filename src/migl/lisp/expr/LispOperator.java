@@ -30,4 +30,6 @@ public abstract class LispOperator implements LispExpression {
     public List<LispExpression> getListe() {
         return liste;
     }
+
+    public abstract String getIdentifier();
 }

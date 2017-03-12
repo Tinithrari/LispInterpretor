@@ -25,4 +25,9 @@ public class Sin extends LispOperator {
         return number.precision() == 1 ? Math.sin(number.intValue()) : Math.sin(number.doubleValue());
     }
 
+    @Override
+    public String getIdentifier() {
+        return "sin";
+    }
+
 }

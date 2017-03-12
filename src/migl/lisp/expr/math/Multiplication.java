@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
+import migl.lisp.expr.LispVariableContainer;
+import migl.lisp.expr.StringExpression;
 
 public class Multiplication extends LispOperator {
 
@@ -21,11 +23,19 @@ public class Multiplication extends LispOperator {
         resultat = new BigDecimal(1);
 
         for (LispExpression e : this.getListe()) {
+            if (e instanceof StringExpression) {
+                e = LispVariableContainer.get((String) e.getEvaluation());
+            }
             BigDecimal number = new BigDecimal(e.getEvaluation().toString());
             resultat = resultat.multiply(number);
         }
 
         return resultat.scale() > 1 ? resultat.doubleValue() : resultat;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return "*";
     }
 
 }

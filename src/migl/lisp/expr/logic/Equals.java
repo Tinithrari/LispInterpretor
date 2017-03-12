@@ -36,4 +36,9 @@ public class Equals extends LispOperator implements LispLogicExpression {
         return LispBoolean.valueOf(a.doubleValue() == b.doubleValue());
     }
 
+    @Override
+    public String getIdentifier() {
+        return "=";
+    }
+
 }

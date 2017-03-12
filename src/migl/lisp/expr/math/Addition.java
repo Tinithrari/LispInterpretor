@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
+import migl.lisp.expr.LispVariableContainer;
+import migl.lisp.expr.StringExpression;
 import migl.lisp.expr.logic.LispLogicExpression;
 
 public class Addition extends LispOperator {
@@ -21,6 +23,9 @@ public class Addition extends LispOperator {
         for (LispExpression e : this.getListe()) {
             if (e.getEvaluation() instanceof LispLogicExpression)
                 throw new IllegalStateException("An addition cannot contain a boolean type");
+            else if (e instanceof StringExpression) {
+                e = LispVariableContainer.get((String) e.getEvaluation());
+            }
 
             somme = somme.add(new BigDecimal(e.getEvaluation().toString()));
         }
@@ -41,5 +46,10 @@ public class Addition extends LispOperator {
         builder.append(")");
 
         return builder.toString();
+    }
+
+    @Override
+    public String getIdentifier() {
+        return "+";
     }
 }

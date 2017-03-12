@@ -34,4 +34,9 @@ public class Pow extends LispOperator {
         return a.pow(b.intValue()).doubleValue();
     }
 
+    @Override
+    public String getIdentifier() {
+        return "pow";
+    }
+
 }

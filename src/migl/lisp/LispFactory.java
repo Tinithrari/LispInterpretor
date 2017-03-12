@@ -1,5 +1,7 @@
 package migl.lisp;
 
+import migl.lisp.expr.LispVariableContainer;
+
 /**
  * Simple factory to access the interpreted implementation.
  * 
@@ -18,6 +20,7 @@ public class LispFactory {
      * @return a new lisp interpreter.
      */
     public static Lisp makeIntepreter() {
+        LispVariableContainer.init();
         return new LispImpl();
     }
 }
