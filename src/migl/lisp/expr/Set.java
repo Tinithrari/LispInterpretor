@@ -30,7 +30,7 @@ public class Set extends LispOperator {
         }
 
         if (LispVariableContainer.get((String) this.name.getEvaluation()) == null)
-            throw new LispError("b is undefined");
+            throw new LispError(this.name.getEvaluation() + " is undefined");
 
         LispVariableContainer.set((String) name.getEvaluation(), value);
 

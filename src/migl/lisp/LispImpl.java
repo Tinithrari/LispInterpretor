@@ -100,23 +100,23 @@ public class LispImpl implements Lisp {
         if (ex instanceof ConsList) {
             ConsList<Object> list = (ConsList<Object>) ex;
             try {
-                expr = LispExpressionFactory.createExpression(list);
+                expr = LispExpressionFactory.createExpression(list, true);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                     | NoSuchMethodException | SecurityException e) {
-                throw new LispError("Synthax error", e);
+                throw new LispError("Synthax error");
             }
         } else if (ex instanceof BigInteger) {
             BigInteger bint = (BigInteger) ex;
-            expr = LispExpressionFactory.createExpression(bint);
+            expr = LispExpressionFactory.createExpression(bint, true);
         } else if (ex instanceof Double) {
             Double d = (Double) ex;
-            expr = LispExpressionFactory.createExpression(d);
+            expr = LispExpressionFactory.createExpression(d, true);
         } else if (ex instanceof LispBoolean) {
             LispBoolean lB = (LispBoolean) ex;
-            expr = LispExpressionFactory.createExpression(lB);
+            expr = LispExpressionFactory.createExpression(lB, true);
         } else if (ex instanceof String) {
             String str = (String) ex;
-            expr = LispExpressionFactory.createExpression(str);
+            expr = LispExpressionFactory.createExpression(str, true);
         } else {
             throw new LispError("Synthax error");
         }

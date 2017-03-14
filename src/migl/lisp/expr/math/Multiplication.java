@@ -34,6 +34,22 @@ public class Multiplication extends LispOperator {
     }
 
     @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("(*");
+
+        for (LispExpression e : this.getListe()) {
+            builder.append(" ");
+            builder.append(e.toString());
+        }
+
+        builder.append(")");
+
+        return builder.toString();
+    }
+
+    @Override
     public String getIdentifier() {
         return "*";
     }

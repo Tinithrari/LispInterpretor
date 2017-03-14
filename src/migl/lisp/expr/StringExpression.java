@@ -12,6 +12,11 @@ public class StringExpression implements LispExpression {
     }
 
     @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
     public Object getEvaluation() throws LispError {
         return this.value;
     }

@@ -29,9 +29,10 @@ public class Define extends LispOperator {
             throw new LispError("too few operands");
         }
 
-        LispVariableContainer.set((String) name.getEvaluation(), value);
+        LispVariableContainer.set((String) name.getEvaluation(),
+                value instanceof Lambda ? new LambdaExecutor((Lambda) value) : value);
 
-        return value.getEvaluation();
+        return value instanceof Lambda ? value.toString() : value.getEvaluation();
     }
 
     @Override

@@ -35,38 +35,44 @@ public final class LispExpressionFactory {
     private LispExpressionFactory() {
     }
 
-    public static LispExpression createExpression(ConsList<Object> data) throws IllegalAccessException,
+    public static LispExpression createExpression(ConsList<Object> data, boolean first) throws IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, LispError {
-        LispExpression expr = createExpression((String) (data.car()));
+        LispExpression expr = createExpression((String) (data.car()), first);
+        boolean argument = true;
         data = data.cdr();
 
         if (data == null)
             return expr;
 
         for (Object o : data) {
-            if (o instanceof ConsList)
-                expr.add(createExpression((ConsList<Object>) o));
+            if (o instanceof ConsList && expr instanceof Lambda && argument) {
+                for (Object args : (ConsList<Object>) o) {
+                    expr.add(new StringExpression((String) args));
+                }
+                argument = false;
+            } else if (o instanceof ConsList)
+                expr.add(createExpression((ConsList<Object>) o, false));
             else
                 expr.add((LispExpression) LispExpressionFactory.class
-                        .getDeclaredMethod("createExpression", o.getClass()).invoke(null, o));
+                        .getDeclaredMethod("createExpression", o.getClass(), boolean.class).invoke(null, o, false));
         }
 
         return expr;
     }
 
-    public static LispExpression createExpression(BigInteger data) {
+    public static LispExpression createExpression(BigInteger data, boolean first) {
         return new BigIntegerExpression(data);
     }
 
-    public static LispExpression createExpression(Double data) {
+    public static LispExpression createExpression(Double data, boolean first) {
         return new DoubleExpression(data);
     }
 
-    public static LispExpression createExpression(LispBoolean data) {
+    public static LispExpression createExpression(LispBoolean data, boolean first) {
         return new LispBooleanExpression(data);
     }
 
-    public static LispExpression createExpression(String data) {
+    public static LispExpression createExpression(String data, boolean first) throws LispError {
         if (data == null)
             return null;
         switch (data) {
@@ -127,7 +133,13 @@ public final class LispExpressionFactory {
         case "list":
             return new List();
         default:
-            return new StringExpression(data);
+            LispExpression contenu = LispVariableContainer.get(data);
+
+            if (contenu == null && first) {
+                throw new LispError(data + " is undefined");
+            }
+
+            return first ? contenu : new StringExpression(data);
 
         }
     }
