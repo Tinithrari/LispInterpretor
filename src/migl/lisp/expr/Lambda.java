@@ -24,7 +24,10 @@ public class Lambda extends LispOperator {
             } else if (!(expr instanceof LispOperator)) {
                 throw new LispError("");
             } else {
-                operator = (LispOperator) expr;
+                if (!(expr instanceof Lambda))
+                    operator = (LispOperator) expr;
+                else
+                    operator = new LambdaExecutor((Lambda) expr);
             }
         }
     }

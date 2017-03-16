@@ -6,7 +6,20 @@ public class List extends LispOperator {
 
     @Override
     public Object getEvaluation() throws LispError {
-        throw new UnsupportedOperationException();
+        StringBuilder builder = new StringBuilder();
+        boolean first = true;
+
+        builder.append("(");
+
+        for (LispExpression e : this.getListe()) {
+            if (!first)
+                builder.append(" ");
+            builder.append(e.getEvaluation());
+            first = false;
+        }
+        builder.append(")");
+
+        return builder.toString();
     }
 
     @Override
