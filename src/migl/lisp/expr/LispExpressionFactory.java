@@ -39,22 +39,22 @@ public final class LispExpressionFactory {
             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, LispError {
         LispExpression expr = createExpression((String) (data.car()), first);
         boolean argument = true;
-        data = data.cdr();
+        ConsList<Object> args = data.cdr();
 
-        if (data == null)
+        if (args == null)
             return expr;
 
-        for (Object o : data) {
-            if (o instanceof ConsList && expr instanceof Lambda && argument) {
-                for (Object args : (ConsList<Object>) o) {
-                    expr.add(new StringExpression((String) args));
+        for (Object arg : args) {
+            if (arg instanceof ConsList && expr instanceof Lambda && argument) {
+                for (Object component : (ConsList<Object>) arg) {
+                    expr.add(new StringExpression((String) component));
                 }
                 argument = false;
-            } else if (o instanceof ConsList)
-                expr.add(createExpression((ConsList<Object>) o, false));
+            } else if (arg instanceof ConsList)
+                expr.add(createExpression((ConsList<Object>) arg, false));
             else
                 expr.add((LispExpression) LispExpressionFactory.class
-                        .getDeclaredMethod("createExpression", o.getClass(), boolean.class).invoke(null, o, false));
+                        .getDeclaredMethod("createExpression", arg.getClass(), boolean.class).invoke(null, arg, false));
         }
 
         return expr;

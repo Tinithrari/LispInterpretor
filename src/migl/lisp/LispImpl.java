@@ -80,18 +80,18 @@ public class LispImpl implements Lisp {
 
     @Override
     public Object parse(String expr) throws LispError {
-        expr = expr.trim();
-        if (expr.length() == 0 || expr == null)
+        String trimmedExpr = expr.trim();
+        if (trimmedExpr.length() == 0)
             throw new LispError("Cannot parse empty list");
-        if (expr.charAt(0) == ' ' || expr.charAt(0) == '\t')
-            return parse(expr.substring(1));
-        if (expr.charAt(0) == '(')
-            return parseList(expr, false);
-        if (expr.contains(")")) {
+        if (trimmedExpr.charAt(0) == ' ' || trimmedExpr.charAt(0) == '\t')
+            return parse(trimmedExpr.substring(1));
+        if (trimmedExpr.charAt(0) == '(')
+            return parseList(trimmedExpr, false);
+        if (trimmedExpr.contains(")")) {
             throw new LispError("Missing )");
         }
 
-        return getEltValue(expr);
+        return getEltValue(trimmedExpr);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class LispImpl implements Lisp {
                 expr = LispExpressionFactory.createExpression(list, true);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                     | NoSuchMethodException | SecurityException e) {
-                throw new LispError("Synthax error");
+                throw new LispError("Synthax error", e);
             }
         } else if (ex instanceof BigInteger) {
             BigInteger bint = (BigInteger) ex;
