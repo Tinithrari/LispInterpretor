@@ -77,7 +77,7 @@ public final class LispExpressionFactory {
                             .getDeclaredMethod("createExpression", arg.getClass()).invoke(null, arg));
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                         | NoSuchMethodException | SecurityException e) {
-                    throw new LispError(e.getMessage());
+                    throw new LispError("An error occured", e);
                 }
             }
         }
