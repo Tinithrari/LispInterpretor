@@ -1,6 +1,5 @@
 package migl.lisp;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigInteger;
 
 import migl.lisp.expr.LispExpression;
@@ -103,19 +102,18 @@ public class LispImpl implements Lisp {
             ConsList<Object> list = (ConsList<Object>) ex;
             try {
                 expr = LispExpressionFactory.createExpression(list, true);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-                    | NoSuchMethodException | SecurityException e) {
+            } catch (IllegalArgumentException | SecurityException e) {
                 throw new LispError("Synthax error", e);
             }
         } else if (ex instanceof BigInteger) {
             BigInteger bint = (BigInteger) ex;
-            expr = LispExpressionFactory.createExpression(bint, true);
+            expr = LispExpressionFactory.createExpression(bint);
         } else if (ex instanceof Double) {
             Double d = (Double) ex;
-            expr = LispExpressionFactory.createExpression(d, true);
+            expr = LispExpressionFactory.createExpression(d);
         } else if (ex instanceof LispBoolean) {
             LispBoolean lB = (LispBoolean) ex;
-            expr = LispExpressionFactory.createExpression(lB, true);
+            expr = LispExpressionFactory.createExpression(lB);
         } else if (ex instanceof String) {
             String str = (String) ex;
             expr = LispExpressionFactory.createExpression(str, true);
