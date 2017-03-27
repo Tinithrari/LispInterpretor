@@ -18,7 +18,7 @@ public class Not extends LispOperator implements LispLogicExpression {
 
     @Override
     public Object getEvaluation() throws LispError {
-        if (this.getListe().size() == 0)
+        if (this.getListe().isEmpty())
             throw new LispError("Not must have one operand");
         return this.getLogicEvaluation();
     }

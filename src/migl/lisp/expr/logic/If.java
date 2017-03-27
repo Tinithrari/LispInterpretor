@@ -9,7 +9,7 @@ public class If extends LispOperator {
     @Override
     public void add(LispExpression expr) throws LispError {
 
-        if (this.getListe().size() == 0 && !(expr instanceof LispLogicExpression))
+        if (this.getListe().isEmpty() && !(expr instanceof LispLogicExpression))
             throw new LispError("First argument must be a boolean expression");
 
         if (this.getListe().size() == 3)

@@ -38,6 +38,10 @@ public final class LispExpressionFactory {
     public static LispExpression createExpression(ConsList<Object> data, boolean first) throws IllegalAccessException,
             IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, LispError {
         LispExpression expr = createExpression((String) (data.car()), first);
+
+        if (expr == null)
+            throw new LispError("An error occured");
+
         boolean argument = true;
         ConsList<Object> args = data.cdr();
 
