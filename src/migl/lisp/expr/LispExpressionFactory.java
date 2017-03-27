@@ -55,13 +55,10 @@ public final class LispExpressionFactory {
     public static LispExpression createExpression(ConsList<Object> data, boolean first) throws LispError {
         LispExpression expr = createExpression((String) (data.car()), first);
 
-        if (expr == null)
-            throw new LispError("An error occured");
-
         boolean argument = true;
         ConsList<Object> args = data.cdr();
 
-        if (args == null)
+        if (expr == null || args == null)
             return expr;
 
         for (Object arg : args) {
@@ -72,15 +69,15 @@ public final class LispExpressionFactory {
                 argument = false;
             } else if (arg instanceof ConsList) {
                 expr.add(createExpression((ConsList<Object>) arg, false));
-            } else if (arg instanceof StringExpression) {
-                expr.add(createExpression((ConsList<Object>) arg, false));
+            } else if (arg instanceof String) {
+                expr.add(createExpression((String) arg, false));
             } else {
                 try {
                     expr.add((LispExpression) LispExpressionFactory.class
                             .getDeclaredMethod("createExpression", arg.getClass()).invoke(null, arg));
                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
                         | NoSuchMethodException | SecurityException e) {
-                    throw new LispError("An error occured", e);
+                    throw new LispError(e.getMessage());
                 }
             }
         }
