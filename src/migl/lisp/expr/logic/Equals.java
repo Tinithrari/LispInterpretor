@@ -33,7 +33,7 @@ public class Equals extends LispOperator implements LispLogicExpression {
         BigDecimal a = new BigDecimal(this.getListe().get(0).getEvaluation().toString());
         BigDecimal b = new BigDecimal(this.getListe().get(1).getEvaluation().toString());
 
-        return LispBoolean.valueOf(a.equals(b));
+        return LispBoolean.valueOf(a.doubleValue() == b.doubleValue());
     }
 
     @Override
