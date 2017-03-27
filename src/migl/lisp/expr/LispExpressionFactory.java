@@ -30,13 +30,29 @@ import migl.lisp.expr.math.Sin;
 import migl.lisp.expr.math.Tan;
 import migl.util.ConsList;
 
+/**
+ * Fabrique d'expression Lisp
+ * 
+ * @author xavier
+ *
+ */
 public final class LispExpressionFactory {
 
     private LispExpressionFactory() {
     }
 
-    public static LispExpression createExpression(ConsList<Object> data, boolean first) throws IllegalAccessException,
-            IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, LispError {
+    /**
+     * Créé une expression à partir d'une conslist passé en paramètre
+     * 
+     * @param data
+     *            La ConsList à traiter
+     * @param first
+     *            est-ce le début de la chaine de traitement
+     * @return L'expression associé à la liste
+     * @throws LispError
+     *             en cas de mauvais argument
+     */
+    public static LispExpression createExpression(ConsList<Object> data, boolean first) throws LispError {
         LispExpression expr = createExpression((String) (data.car()), first);
 
         if (expr == null)
@@ -54,28 +70,67 @@ public final class LispExpressionFactory {
                     expr.add(new StringExpression((String) component));
                 }
                 argument = false;
-            } else if (arg instanceof ConsList)
+            } else if (arg instanceof ConsList) {
                 expr.add(createExpression((ConsList<Object>) arg, false));
-            else
-                expr.add((LispExpression) LispExpressionFactory.class
-                        .getDeclaredMethod("createExpression", arg.getClass(), boolean.class).invoke(null, arg, false));
+            } else if (arg instanceof StringExpression) {
+                expr.add(createExpression((ConsList<Object>) arg, false));
+            } else {
+                try {
+                    expr.add((LispExpression) LispExpressionFactory.class
+                            .getDeclaredMethod("createExpression", arg.getClass()).invoke(null, arg));
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                        | NoSuchMethodException | SecurityException e) {
+                    throw new LispError("An error occured", e);
+                }
+            }
         }
 
         return expr;
     }
 
-    public static LispExpression createExpression(BigInteger data, boolean first) {
+    /**
+     * Créé une BigIntegerExpression
+     * 
+     * @param data
+     *            le biginteger à encapsuler
+     * @return L'expression encapsulé
+     */
+    public static LispExpression createExpression(BigInteger data) {
         return new BigIntegerExpression(data);
     }
 
-    public static LispExpression createExpression(Double data, boolean first) {
+    /**
+     * Créé une DoubleExpression
+     * 
+     * @param data
+     *            le biginteger à encapsuler
+     * @return L'expression encapsulé
+     */
+    public static LispExpression createExpression(Double data) {
         return new DoubleExpression(data);
     }
 
-    public static LispExpression createExpression(LispBoolean data, boolean first) {
+    /**
+     * Créé une LispBooleanExpression
+     * 
+     * @param data
+     *            Le LispBoolean a encapsuler
+     * @return L'expression encapsulé
+     */
+    public static LispExpression createExpression(LispBoolean data) {
         return new LispBooleanExpression(data);
     }
 
+    /**
+     * Créé une expression selon le contenu d'une chaine de caractère
+     * 
+     * @param data
+     *            La chaine de caractère à traiter
+     * @param first
+     * @return est-ce le début de la chaine de traitement
+     * @throws LispError
+     *             En cas d'expression inconnu
+     */
     public static LispExpression createExpression(String data, boolean first) throws LispError {
         if (data == null)
             return null;

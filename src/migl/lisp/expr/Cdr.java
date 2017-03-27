@@ -2,6 +2,12 @@ package migl.lisp.expr;
 
 import migl.lisp.LispError;
 
+/**
+ * Opérateur permettant l'accès aux membre droits du Cons
+ * 
+ * @author xavier
+ *
+ */
 public class Cdr extends LispOperator {
 
     private ConsExpression cons;

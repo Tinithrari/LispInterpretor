@@ -4,11 +4,20 @@ import java.util.ArrayList;
 
 import migl.lisp.LispError;
 
+/**
+ * Lambda expression
+ * 
+ * @author xavier
+ *
+ */
 public class Lambda extends LispOperator {
 
     private java.util.List<String> listeVariable;
     private LispOperator operator;
 
+    /**
+     * Créé une lambda expression vide
+     */
     public Lambda() {
         super();
         this.listeVariable = new ArrayList<>();

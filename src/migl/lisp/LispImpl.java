@@ -41,7 +41,9 @@ public class LispImpl implements Lisp {
 
         for (i = 1; i < expr.length() && expr.charAt(i) != ')'; i++) {
             if (expr.charAt(i) == '(') {
-                int fin, level;
+                int fin;
+                int level;
+
                 for (fin = i, level = 0; fin < expr.length() && !(expr.charAt(fin) == ')' && level == 1); fin++) {
                     if (expr.charAt(fin) == '(') {
                         level++;

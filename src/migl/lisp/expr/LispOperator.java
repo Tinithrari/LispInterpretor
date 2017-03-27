@@ -5,10 +5,19 @@ import java.util.List;
 
 import migl.lisp.LispError;
 
+/**
+ * Opérateur Lisp
+ * 
+ * @author xavier
+ *
+ */
 public abstract class LispOperator implements LispExpression {
 
     private List<LispExpression> liste;
 
+    /**
+     * Constructeur pour initialiser la liste d'argument
+     */
     public LispOperator() {
         this.liste = new ArrayList<LispExpression>();
     }

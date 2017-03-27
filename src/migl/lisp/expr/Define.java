@@ -2,6 +2,12 @@ package migl.lisp.expr;
 
 import migl.lisp.LispError;
 
+/**
+ * Opérateur define
+ * 
+ * @author xavier
+ *
+ */
 public class Define extends LispOperator {
 
     private StringExpression name;

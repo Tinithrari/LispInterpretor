@@ -3,11 +3,20 @@ package migl.lisp.expr;
 import migl.lisp.LispError;
 import migl.util.Cons;
 
+/**
+ * Expression formée à partir de cons
+ * 
+ * @author xavier
+ *
+ */
 public class ConsExpression extends LispOperator {
 
     private Cons<LispExpression, LispExpression> cons;
     private int nbElt;
 
+    /**
+     * Créé une ConsExpression
+     */
     public ConsExpression() {
         cons = Cons.nil();
         nbElt = 0;
@@ -17,11 +26,11 @@ public class ConsExpression extends LispOperator {
     public void add(LispExpression expr) throws LispError {
         switch (nbElt) {
         case 0:
-            cons = new Cons<LispExpression, LispExpression>(expr, null);
+            cons = new Cons<>(expr, null);
             break;
         case 1:
             if (expr != null)
-                cons = new Cons<LispExpression, LispExpression>(cons.car(), expr);
+                cons = new Cons<>(cons.car(), expr);
             break;
         default:
             throw new LispError("Too much arguments");
@@ -62,6 +71,11 @@ public class ConsExpression extends LispOperator {
         return builder.toString();
     }
 
+    /**
+     * Récupère le cons contenu dans l'éxpression
+     * 
+     * @return Le cons de l'expression
+     */
     public Cons<LispExpression, LispExpression> getCons() {
         return cons;
     }
