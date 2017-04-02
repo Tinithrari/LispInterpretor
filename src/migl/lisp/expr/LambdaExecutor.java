@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import migl.lisp.LispError;
 
+/**
+ * Environnement d'exécution pour une lambda expression
+ * 
+ * @author xavier
+ *
+ */
 public class LambdaExecutor extends LispOperator {
 
     private Lambda lambda;

@@ -4,6 +4,12 @@ import migl.lisp.LispError;
 import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * Expression conditionnel
+ * 
+ * @author xavier
+ *
+ */
 public class If extends LispOperator {
 
     @Override

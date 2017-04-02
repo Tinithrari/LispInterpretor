@@ -19,7 +19,7 @@ public abstract class LispOperator implements LispExpression {
      * Constructeur pour initialiser la liste d'argument
      */
     public LispOperator() {
-        this.liste = new ArrayList<LispExpression>();
+        this.liste = new ArrayList<>();
     }
 
     @Override

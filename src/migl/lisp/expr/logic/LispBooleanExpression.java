@@ -4,10 +4,22 @@ import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispExpression;
 
+/**
+ * Expression booléene Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class LispBooleanExpression implements LispExpression, LispLogicExpression {
 
     private LispBoolean value;
 
+    /**
+     * Créé une expression Lisp
+     * 
+     * @param value
+     *            Valeur de l'expression Lisp
+     */
     public LispBooleanExpression(LispBoolean value) {
         this.value = value;
     }

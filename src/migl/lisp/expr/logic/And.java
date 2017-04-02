@@ -5,6 +5,12 @@ import migl.lisp.LispError;
 import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * ET logique en lisp
+ * 
+ * @author xavier
+ *
+ */
 public class And extends LispOperator implements LispLogicExpression {
 
     @Override
@@ -29,8 +35,8 @@ public class And extends LispOperator implements LispLogicExpression {
         LispLogicExpression a = (LispLogicExpression) this.getListe().get(0);
         LispLogicExpression b = (LispLogicExpression) this.getListe().get(1);
 
-        return ((LispBoolean) a.getLogicEvaluation()).value() && ((LispBoolean) b.getLogicEvaluation()).value()
-                ? LispBoolean.TRUE : LispBoolean.FALSE;
+        return (a.getLogicEvaluation()).value() && (b.getLogicEvaluation()).value() ? LispBoolean.TRUE
+                : LispBoolean.FALSE;
     }
 
     @Override

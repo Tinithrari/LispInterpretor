@@ -2,6 +2,12 @@ package migl.lisp.expr;
 
 import migl.lisp.LispError;
 
+/**
+ * Liste d'élément lisp
+ * 
+ * @author xavier
+ *
+ */
 public class List extends LispOperator {
 
     @Override

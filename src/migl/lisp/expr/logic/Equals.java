@@ -8,6 +8,12 @@ import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Egalité en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Equals extends LispOperator implements LispLogicExpression {
 
     @Override

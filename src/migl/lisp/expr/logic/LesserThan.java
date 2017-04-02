@@ -8,6 +8,12 @@ import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Expression d'inferiorité
+ * 
+ * @author xavier
+ *
+ */
 public class LesserThan extends LispOperator implements LispLogicExpression {
 
     @Override

@@ -8,6 +8,12 @@ import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Supérieur ou égal en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class GreaterThan extends LispOperator implements LispLogicExpression {
 
     @Override

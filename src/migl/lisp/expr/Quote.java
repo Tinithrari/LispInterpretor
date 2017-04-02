@@ -2,6 +2,12 @@ package migl.lisp.expr;
 
 import migl.lisp.LispError;
 
+/**
+ * Chaine de caractère à ne pas évaluer
+ * 
+ * @author xavier
+ *
+ */
 public class Quote extends LispOperator {
 
     @Override

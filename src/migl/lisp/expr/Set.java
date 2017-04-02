@@ -2,6 +2,10 @@ package migl.lisp.expr;
 
 import migl.lisp.LispError;
 
+/**
+ * @author xavier
+ *
+ */
 public class Set extends LispOperator {
 
     private StringExpression name;
