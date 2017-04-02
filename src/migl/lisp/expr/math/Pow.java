@@ -6,12 +6,20 @@ import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * Opérateur puissance en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Pow extends LispOperator {
 
     @Override
     public Object getEvaluation() throws LispError {
-        BigDecimal a, b;
-        Object eval1, eval2;
+        BigDecimal a;
+        BigDecimal b;
+        Object eval1;
+        Object eval2;
         if (this.getListe().size() != 2)
             throw new LispError("Invalid number of operands");
 

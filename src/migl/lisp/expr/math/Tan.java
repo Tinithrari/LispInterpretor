@@ -6,6 +6,12 @@ import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * Opérateur tangente en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Tan extends LispOperator {
 
     @Override

@@ -35,7 +35,7 @@ public class Or extends LispOperator implements LispLogicExpression {
         LispLogicExpression a = (LispLogicExpression) this.getListe().get(0);
         LispLogicExpression b = (LispLogicExpression) this.getListe().get(1);
 
-        return ((LispBoolean) a.getLogicEvaluation()).value() || (b.getLogicEvaluation()).value() ? LispBoolean.TRUE
+        return (a.getLogicEvaluation()).value() || (b.getLogicEvaluation()).value() ? LispBoolean.TRUE
                 : LispBoolean.FALSE;
     }
 

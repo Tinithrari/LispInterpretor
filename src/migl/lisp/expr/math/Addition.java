@@ -9,6 +9,12 @@ import migl.lisp.expr.LispVariableContainer;
 import migl.lisp.expr.StringExpression;
 import migl.lisp.expr.logic.LispLogicExpression;
 
+/**
+ * Addition en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Addition extends LispOperator {
 
     @Override

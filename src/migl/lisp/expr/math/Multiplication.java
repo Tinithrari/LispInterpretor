@@ -8,6 +8,12 @@ import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.LispVariableContainer;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Multiplication en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Multiplication extends LispOperator {
 
     @Override

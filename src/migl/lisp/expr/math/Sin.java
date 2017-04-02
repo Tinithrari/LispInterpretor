@@ -6,6 +6,12 @@ import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * Opérateur sinus en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Sin extends LispOperator {
 
     @Override
