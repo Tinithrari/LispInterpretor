@@ -8,12 +8,20 @@ import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.LispVariableContainer;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Opérateur minimum en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Min extends LispOperator {
 
     @Override
     public Object getEvaluation() throws LispError {
-        BigDecimal a, b;
-        Object eval1, eval2;
+        BigDecimal a;
+        BigDecimal b;
+        Object eval1;
+        Object eval2;
         if (this.getListe().size() != 2)
             throw new LispError("Invalid number of operands");
 

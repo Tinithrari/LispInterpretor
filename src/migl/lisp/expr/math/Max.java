@@ -9,6 +9,12 @@ import migl.lisp.expr.LispVariableContainer;
 import migl.lisp.expr.StringExpression;
 import migl.lisp.expr.logic.LispBooleanExpression;
 
+/**
+ * Opérateur max en lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Max extends LispOperator {
 
     @Override
@@ -20,7 +26,8 @@ public class Max extends LispOperator {
 
     @Override
     public Object getEvaluation() throws LispError {
-        BigDecimal a, b;
+        BigDecimal a;
+        BigDecimal b;
         if (this.getListe().size() != 2)
             throw new LispError("Invalid number of operands");
 

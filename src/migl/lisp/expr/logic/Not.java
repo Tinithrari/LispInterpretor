@@ -5,6 +5,12 @@ import migl.lisp.LispError;
 import migl.lisp.expr.LispExpression;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * Représente le NON logique en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Not extends LispOperator implements LispLogicExpression {
 
     @Override
@@ -26,7 +32,7 @@ public class Not extends LispOperator implements LispLogicExpression {
     @Override
     public LispBoolean getLogicEvaluation() throws LispError {
         LispLogicExpression expr = (LispLogicExpression) this.getListe().get(0);
-        return ((LispBoolean) expr.getLogicEvaluation()).value() ? LispBoolean.FALSE : LispBoolean.TRUE;
+        return (expr.getLogicEvaluation()).value() ? LispBoolean.FALSE : LispBoolean.TRUE;
     }
 
     @Override

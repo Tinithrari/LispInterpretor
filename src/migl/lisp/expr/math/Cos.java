@@ -6,6 +6,12 @@ import migl.lisp.LispBoolean;
 import migl.lisp.LispError;
 import migl.lisp.expr.LispOperator;
 
+/**
+ * Cosinus en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Cos extends LispOperator {
 
     @Override

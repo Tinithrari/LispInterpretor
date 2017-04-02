@@ -12,6 +12,11 @@ public class DoubleExpression implements LispExpression {
 
     private Double value;
 
+    /**
+     * Constitue l'expression à partir d'un double
+     * 
+     * @param value
+     */
     public DoubleExpression(Double value) {
         this.value = value;
     }

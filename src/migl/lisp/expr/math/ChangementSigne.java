@@ -7,6 +7,12 @@ import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.LispVariableContainer;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Opérateur de changement de signe et de soustraction
+ * 
+ * @author xavier
+ *
+ */
 public class ChangementSigne extends LispOperator {
 
     @Override

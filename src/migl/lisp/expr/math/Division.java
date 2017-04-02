@@ -8,6 +8,12 @@ import migl.lisp.expr.LispOperator;
 import migl.lisp.expr.LispVariableContainer;
 import migl.lisp.expr.StringExpression;
 
+/**
+ * Division en Lisp
+ * 
+ * @author xavier
+ *
+ */
 public class Division extends LispOperator {
 
     @Override
@@ -19,7 +25,8 @@ public class Division extends LispOperator {
 
     @Override
     public Object getEvaluation() throws LispError {
-        BigDecimal dividende, diviseur;
+        BigDecimal dividende;
+        BigDecimal diviseur;
 
         if (this.getListe().get(0) instanceof StringExpression) {
             this.getListe().set(0, LispVariableContainer.get((String) this.getListe().get(0).getEvaluation()));

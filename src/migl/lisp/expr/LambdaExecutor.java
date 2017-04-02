@@ -15,6 +15,11 @@ public class LambdaExecutor extends LispOperator {
     private Lambda lambda;
     private java.util.List<LispExpression> variables;
 
+    /**
+     * Décore une lambda expression pour son éxecution
+     * 
+     * @param lambda
+     */
     public LambdaExecutor(Lambda lambda) {
         super();
         this.variables = new ArrayList<>();
